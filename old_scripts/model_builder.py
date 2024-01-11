@@ -52,8 +52,10 @@ class TinyVGG(nn.Module):
         )
     
     def forward(self, x: torch.Tensor):
-        x = self.conv_block_1(x)
-        x = self.conv_block_2(x)
-        x = self.classifier(x)
-        return x
-        # return self.classifier(self.block_2(self.block_1(x))) # <- leverage the benefits of operator fusion
+        #x = self.conv_block_1(x)
+        #x = self.conv_block_2(x)
+        #x = self.classifier(x)
+        #return x
+        
+        # Using operator fusion (faster)
+        return self.classifier(self.conv_block_2(self.conv_block_1(x)))
