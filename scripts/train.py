@@ -9,8 +9,7 @@ import torch
 from torchvision import transforms
 import data_setup, engine#, model, utils
 import utils
-import model_builder
-import model_2
+import model
 import numpy as np
 
 #################
@@ -208,13 +207,14 @@ def train_model(model_name=model_name,
 
     # Create model with help from model.py
     model_name = "TinyVGG"
-    model_class = getattr(model_2, model_name) # Assume model_name contains the string name of the class
+    model_class = getattr(model, model_name) # Assume model_name contains the string name of the class
 
     model = model_class(
         input_shape=3, # RGB
         output_shape=len(class_names),
-        hidden_units_1=HIDDEN_UNITS_1,
-        hidden_units_2=HIDDEN_UNITS_2,
+        hidden_units=HIDDEN_UNITS_1,
+        #hidden_units_1=HIDDEN_UNITS_1,
+        #hidden_units_2=HIDDEN_UNITS_2,
         #hu_b1=20,
         #hu_b2=20,
         #ksize_b1=3,
