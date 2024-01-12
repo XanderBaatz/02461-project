@@ -295,3 +295,75 @@ class AJ_CNN_DropoutMid(AJ_CNN):
             nn.Dropout2d(p=dropout), # Spatial dropout layer
             nn.MaxPool2d(kernel_size=(2,2)),
         )
+        
+
+
+# Custom CNN with dropblock tech between each block
+## Test accuracy, cifar-10, 100 epochs, no data aug: 73.9%
+class AJ_CNN_DropBlockEnd(AJ_CNN):
+    def __init__(self,
+                input_shape:int,
+                output_shape:int,
+                hidden_units_1:int=16,
+                hidden_units_2:int=32,
+                dropout:float=0.2
+                ) -> None:
+        
+        super().__init__(input_shape, output_shape, hidden_units_1, hidden_units_2)
+        
+        # Spatial dropout layer
+        self.dropout_layer = DropBlock(block_size=3, p=dropout)
+        
+        # Add dropout layer to each convolution block
+        self.conv_block_1.add_module('dropout_layer', self.dropout_layer)
+        self.conv_block_2.add_module('dropout_layer', self.dropout_layer)
+        self.conv_block_3.add_module('dropout_layer', self.dropout_layer)
+        
+
+
+# Custom CNN with DropBlock after activation function in each convolution block
+## Worse: 70% accuracy, longer training time
+class AJ_CNN_DropBlockMid(AJ_CNN):
+    def __init__(self,
+                input_shape:int,
+                output_shape:int,
+                hidden_units_1:int=16,
+                hidden_units_2:int=32,
+                dropout:float=0.9,
+                dbbs:int=7,
+                ) -> None:
+        
+        super().__init__(input_shape, output_shape, hidden_units_1, hidden_units_2)
+        
+        self.conv_block_1 = nn.Sequential(
+            nn.Conv2d(in_channels=input_shape,     
+                      out_channels=hidden_units_1, 
+                      kernel_size=(3,3),           
+                      stride=1,                    
+                      ),
+            nn.ReLU(),
+            DropBlock(block_size=dbbs, p=dropout),
+            nn.MaxPool2d(kernel_size=(2,2)),
+        )
+        
+        self.conv_block_2 = nn.Sequential(
+            nn.Conv2d(in_channels=hidden_units_1,     
+                      out_channels=hidden_units_2, 
+                      kernel_size=(3,3),           
+                      stride=1,                    
+                      ),
+            nn.ReLU(),
+            DropBlock(block_size=dbbs, p=dropout),
+            nn.MaxPool2d(kernel_size=(2,2)),
+        )
+        
+        self.conv_block_3 = nn.Sequential(
+            nn.Conv2d(in_channels=hidden_units_2,     
+                      out_channels=hidden_units_2, 
+                      kernel_size=(3,3),           
+                      stride=1,                    
+                      ),
+            nn.ReLU(),
+            DropBlock(block_size=dbbs, p=dropout),
+            nn.MaxPool2d(kernel_size=(2,2)),
+        )
