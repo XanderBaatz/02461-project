@@ -6,6 +6,7 @@ PyTorch model code for TinyVGG model.
 import torch
 from torch import nn
 from lib.dropblock import DropBlock
+from torchinfo import summary
 
 # Vanilla TinyVGG model
 class TinyVGG(nn.Module):
@@ -22,8 +23,9 @@ class TinyVGG(nn.Module):
     """
     def __init__(self,
                  input_shape: int,
-                 hidden_units: int,
-                 output_shape: int) -> None:
+                 output_shape: int,
+                 hidden_units: int=10,
+                 ) -> None:
         
         super().__init__()
         
@@ -256,7 +258,7 @@ class AJ_CNN_DropoutMid(AJ_CNN):
                 output_shape:int,
                 hidden_units_1:int=16,
                 hidden_units_2:int=32,
-                dropout:float=0.2
+                dropout:float=0.1
                 ) -> None:
         
         super().__init__(input_shape, output_shape, hidden_units_1, hidden_units_2)
@@ -367,3 +369,152 @@ class AJ_CNN_DropBlockMid(AJ_CNN):
             DropBlock(block_size=dbbs, p=dropout),
             nn.MaxPool2d(kernel_size=(2,2)),
         )
+
+
+
+# Custom CNN with dropout in classifier and batch normalizations
+class AJ_CNN_BNN_Dropout_Giga(AJ_CNN):
+    def __init__(self,
+                input_shape:int,
+                output_shape:int,
+                hidden_units_1:int=16,
+                hidden_units_2:int=32,
+                dropout:float=0.2
+                ) -> None:
+        
+        super().__init__(input_shape, output_shape, hidden_units_1, hidden_units_2)
+        
+        self.conv_block_1 = nn.Sequential(
+            nn.Conv2d(in_channels=input_shape,     
+                      out_channels=hidden_units_1, 
+                      kernel_size=(3,3),           
+                      stride=1,
+                      padding=1                    
+                      ),
+            nn.BatchNorm2d(num_features=hidden_units_1),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=(2,2)),
+        ) # output: ([1, 16, 32, 32])
+        
+        self.conv_block_2 = nn.Sequential(
+            nn.Conv2d(in_channels=hidden_units_1,     
+                      out_channels=hidden_units_2, 
+                      kernel_size=(3,3),           
+                      stride=1,
+                      padding=1                    
+                      ),
+            nn.BatchNorm2d(num_features=hidden_units_2),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=(2,2)),
+        ) # output: ([1, 32, 16, 16])
+        
+        self.conv_block_3 = nn.Sequential(
+            nn.Conv2d(in_channels=hidden_units_2,     
+                      out_channels=hidden_units_2, 
+                      kernel_size=(3,3),           
+                      stride=1,
+                      padding=1                    
+                      ),
+            nn.BatchNorm2d(num_features=hidden_units_2),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=(2,2)),
+        ) # output: ([1, 32, 8, 8])
+        
+        self.classifier = nn.Sequential(
+            nn.Flatten(),
+            nn.Dropout(p=dropout),
+            nn.Linear(in_features=hidden_units_2*8*8,
+                        out_features=hidden_units_2*8*2),
+            nn.BatchNorm1d(num_features=hidden_units_2*8*2),
+            nn.ReLU(),
+            nn.Linear(in_features=hidden_units_2*8*2,
+                        out_features=output_shape),
+        )
+
+    def forward(self, x: torch.Tensor):
+        # Operator fusion (faster)
+        return self.classifier(self.conv_block_3(self.conv_block_2(self.conv_block_1(x))))
+
+
+
+# Custom CNN with dropout in classifier and batch normalizations
+class AJ_CNN_BNorm(nn.Module):
+    def __init__(self,
+                input_shape:int,
+                output_shape:int,
+                hidden_units:int=10,
+                dropout:float=0.2
+                ) -> None:
+        
+        super().__init__()
+        
+        self.conv_block_1 = nn.Sequential(
+            nn.Conv2d(in_channels=input_shape,     
+                      out_channels=hidden_units, 
+                      kernel_size=(3,3),           
+                      stride=1,
+                      padding=1                    
+                      ),
+            nn.BatchNorm2d(num_features=hidden_units),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=(2,2)),
+        )
+        
+        self.conv_block_2 = nn.Sequential(
+            nn.Conv2d(in_channels=hidden_units,     
+                      out_channels=hidden_units*2, 
+                      kernel_size=(3,3),           
+                      stride=1,
+                      padding=1                    
+                      ),
+            nn.BatchNorm2d(num_features=hidden_units*2),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=(2,2)),
+        )
+        
+        self.conv_block_3 = nn.Sequential(
+            nn.Conv2d(in_channels=hidden_units*2,     
+                      out_channels=hidden_units*2, 
+                      kernel_size=(3,3),           
+                      stride=1,
+                      padding=1                    
+                      ),
+            nn.BatchNorm2d(num_features=hidden_units*2),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=(2,2)),
+        )
+        
+        self.classifier = nn.Sequential(
+            nn.Flatten(),
+            nn.Dropout(p=dropout),
+            nn.Linear(in_features=hidden_units*2*8*8,
+                        out_features=output_shape),
+        )
+
+    def forward(self, x: torch.Tensor):
+        #x = self.conv_block_1(x)
+        #print(x.size())
+        #x = self.conv_block_2(x)
+        #print(x.size())
+        #x = self.conv_block_3(x)
+        #print(x.size())
+        #x = self.classifier(x)
+        #return x
+
+        # Operator fusion (faster)
+        return self.classifier(self.conv_block_3(self.conv_block_2(self.conv_block_1(x))))
+
+
+
+if __name__ == "__main__":
+    model = AJ_CNN_BNorm(
+                            input_shape=3,
+                            output_shape=10,
+                            )
+    
+    print(summary(model=model,
+                      input_size=(1, 3, 64, 64),
+                      col_names=["input_size", "output_size", "num_params", "trainable"],
+                      col_width=2,
+                      row_settings=["var_names"]))
+    print("19,920")
