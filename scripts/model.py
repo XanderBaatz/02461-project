@@ -5,6 +5,7 @@ PyTorch model code for TinyVGG model.
 # Libraries
 import torch
 from torch import nn
+from lib.dropblock import DropBlock
 
 # Vanilla TinyVGG model
 class TinyVGG(nn.Module):
@@ -66,13 +67,16 @@ class TinyVGG(nn.Module):
         )
     
     def forward(self, x: torch.Tensor):
-        #x = self.conv_block_1(x)
-        #x = self.conv_block_2(x)
-        #x = self.classifier(x)
-        #return x
+        x = self.conv_block_1(x)
+        x = self.conv_block_2(x)
+        
+        #print(x.size())
+        
+        x = self.classifier(x)
+        return x
         
         # Using operator fusion (faster)
-        return self.classifier(self.conv_block_2(self.conv_block_1(x)))
+        #return self.classifier(self.conv_block_2(self.conv_block_1(x)))
 
 
 
@@ -123,3 +127,171 @@ class TinyVGG_MultiDropout(TinyVGG):
                                           nn.MaxPool2d(kernel_size=2)
         )
 
+
+
+# Custom CNN model
+class AJ_CNN(nn.Module):
+    """
+    Custom made CNN inspired by TinyVGG.
+    """
+    
+    def __init__(self,
+                 input_shape:int,
+                 output_shape:int,
+                 hidden_units_1:int=16,
+                 hidden_units_2:int=32
+                 ) -> None:
+        
+        super().__init__()
+        
+        self.conv_block_1 = nn.Sequential(
+            # Convolution layer, model hyperparameters
+            nn.Conv2d(in_channels=input_shape,     # input shape, RGB, 3
+                      out_channels=hidden_units_1, # Filters
+                      kernel_size=(3,3),           # 3x3 pixels
+                      stride=1,                    # meaning it moves 1 pixel at a time
+                      ),
+            
+            # Relu actvation function, simple and computationally efficient
+            ## essentially, it reshapes the output, and therefore the function
+            nn.ReLU(), # converts any negative values to zero, while positive values remain unchanged
+            
+            # Max pooling function
+            ## returns the max value after the activation function
+            ## (2,2) indicates that it'll take the max value out of a 2x2 region
+            ## will further condense the info
+            nn.MaxPool2d(kernel_size=(2,2)),
+            
+            # DropBlock function
+            #DropBlock(block_size=7, p=dropout)
+            #nn.Dropout2d(p=dropout)
+        )
+        
+        # x2 the size of the first convolution block
+        self.conv_block_2 = nn.Sequential(
+            # Convolution layer, model hyperparameters
+            nn.Conv2d(in_channels=hidden_units_1,     
+                      out_channels=hidden_units_2, 
+                      kernel_size=(3,3),           
+                      stride=1,                    
+                      ),
+            
+            # Relu actvation function, simple and computationally efficient
+            nn.ReLU(),
+            
+            # Max pooling function
+            nn.MaxPool2d(kernel_size=(2,2)),
+            
+            # DropBlock function
+            #DropBlock(block_size=7, p=dropout)
+            #nn.Dropout2d(p=dropout)
+        )
+        
+        self.conv_block_3 = nn.Sequential(
+            # Convolution layer, model hyperparameters
+            nn.Conv2d(in_channels=hidden_units_2,     
+                      out_channels=hidden_units_2, 
+                      kernel_size=(3,3),           
+                      stride=1,                    
+                      ),
+            
+            # Relu actvation function, simple and computationally efficient
+            nn.ReLU(),
+            
+            # Max pooling function
+            nn.MaxPool2d(kernel_size=(2,2)),
+            
+            # DropBlock function
+            #DropBlock(block_size=7, p=dropout)
+            #nn.Dropout2d(p=dropout)
+        )
+        
+        self.classifier = nn.Sequential(
+                                        nn.Flatten(),
+                                        # Fully connected layers (fc), aka dense layer
+                                        #nn.Linear(in_features=256, out_features=128),
+                                        #nn.Linear(in_features=128, out_features=64),
+                                        nn.Linear(in_features=hidden_units_2*6*6, # 64
+                                                  out_features=output_shape)
+        )
+        
+    def forward(self, x: torch.Tensor):
+        x = self.conv_block_1(x)
+        x = self.conv_block_2(x)
+        x = self.conv_block_3(x)
+        #print(x.size())
+        x = self.classifier(x)
+        return x
+    
+    
+    
+# Custom CNN with dropout between each block
+## Test accuracy, cifar-10, 100 epochs, no data aug: 73.9%
+class AJ_CNN_DropoutEnd(AJ_CNN):
+    def __init__(self,
+                input_shape:int,
+                output_shape:int,
+                hidden_units_1:int=16,
+                hidden_units_2:int=32,
+                dropout:float=0.2
+                ) -> None:
+        
+        super().__init__(input_shape, output_shape, hidden_units_1, hidden_units_2)
+        
+        # Spatial dropout layer
+        self.dropout_layer = nn.Dropout(p=dropout)
+        
+        # Add dropout layer to each convolution block
+        self.conv_block_1.add_module('dropout_layer', self.dropout_layer)
+        self.conv_block_2.add_module('dropout_layer', self.dropout_layer)
+        self.conv_block_3.add_module('dropout_layer', self.dropout_layer)
+
+
+
+# Custom CNN with spatial dropout after activation function in each convolution block
+## Worse: 70% accuracy, longer training time
+class AJ_CNN_DropoutMid(AJ_CNN):
+    def __init__(self,
+                input_shape:int,
+                output_shape:int,
+                hidden_units_1:int=16,
+                hidden_units_2:int=32,
+                dropout:float=0.2
+                ) -> None:
+        
+        super().__init__(input_shape, output_shape, hidden_units_1, hidden_units_2)
+        
+        # Spatial dropout layer
+        
+        self.conv_block_1 = nn.Sequential(
+            nn.Conv2d(in_channels=input_shape,     
+                      out_channels=hidden_units_1, 
+                      kernel_size=(3,3),           
+                      stride=1,                    
+                      ),
+            nn.ReLU(),
+            nn.Dropout2d(p=dropout), # Spatial dropout layer
+            nn.MaxPool2d(kernel_size=(2,2)),
+        )
+        
+        self.conv_block_2 = nn.Sequential(
+            nn.Conv2d(in_channels=hidden_units_1,     
+                      out_channels=hidden_units_2, 
+                      kernel_size=(3,3),           
+                      stride=1,                    
+                      ),
+            nn.ReLU(),
+            nn.Dropout2d(p=dropout), # Spatial dropout layer
+            nn.MaxPool2d(kernel_size=(2,2)),
+        )
+        
+        self.conv_block_3 = nn.Sequential(
+            nn.Conv2d(in_channels=hidden_units_2,     
+                      out_channels=hidden_units_2, 
+                      kernel_size=(3,3),           
+                      stride=1,                    
+                      ),
+            nn.ReLU(),
+            nn.Dropout2d(p=dropout), # Spatial dropout layer
+            nn.MaxPool2d(kernel_size=(2,2)),
+        )
