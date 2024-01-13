@@ -8,7 +8,7 @@ from torch import nn
 from lib.dropblock import DropBlock
 from torchinfo import summary
 
-# Vanilla TinyVGG model
+# Vanilla TinyVGG model .test
 class TinyVGG(nn.Module):
     """
     TinyVGG architecture.
