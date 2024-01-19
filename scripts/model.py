@@ -7,7 +7,7 @@ import torch
 from torch import nn
 from dropblock import DropBlock2D
 
-# Vanilla TinyVGG model
+# Vanilla TinyVGG model .test
 class TinyVGG(nn.Module):
     """
     Inspired by the TinyVGG architecture from the CNN explainer website.
