@@ -8,6 +8,7 @@ from tqdm.auto import tqdm
 from typing import Dict, List, Tuple
 import time
 from torch.utils.tensorboard import SummaryWriter
+import pandas as pd
 
 # Train step function
 def train_step(model: torch.nn.Module,
@@ -65,6 +66,9 @@ def train_step(model: torch.nn.Module,
 
         # 5. Optimizer step
         optimizer.step()
+        
+        # Capture learning rate
+        lr = optimizer.param_groups[0]["lr"]
 
         # Calculate and accumulate accuracy metric across all batches
         y_pred_class = torch.argmax(torch.softmax(y_pred, dim=1), dim=1)
@@ -74,7 +78,7 @@ def train_step(model: torch.nn.Module,
     train_loss = train_loss / len(dataloader)
     train_acc = train_acc / len(dataloader)
     
-    return train_loss, train_acc
+    return train_loss, train_acc, lr
 
 
 
@@ -139,12 +143,16 @@ def test_step(model: torch.nn.Module,
 # Train function
 # Updated: to include writer, so that it can be used with TensorBoard
 def train(model: torch.nn.Module, 
-          train_dataloader: torch.utils.data.DataLoader, 
+          train_dataloader: torch.utils.data.DataLoader,
           test_dataloader: torch.utils.data.DataLoader, 
           optimizer: torch.optim.Optimizer,
           loss_fn: torch.nn.Module,
+          #lr: float,
           epochs: int,
-          device: torch.device, 
+          device: torch.device,
+          dataloader_name=None,
+          seed: int=None,
+          scheduler=None,
           writer: SummaryWriter=None # new parameter to take in a writer
           ) -> Dict[str, List]:
     """
@@ -185,16 +193,22 @@ def train(model: torch.nn.Module,
                   test_acc: [0.3400, 0.2973]} 
     """
     
+    # Get model name
+    model_name = type(model).__name__
+    
     # Create empty results dictionary
-    results = {"train_loss": [],
-               "train_acc": [],
-               "test_loss": [],
-               "test_acc": []
+    results = {
+        "epoch": [],
+        "train_loss": [],
+        "train_acc": [],
+        "test_loss": [],
+        "test_acc": [],
+        "lr": []
     }
 
     # Loop through training and testing steps for a number of epochs
     for epoch in tqdm(range(epochs)):
-        train_loss, train_acc = train_step(model=model,
+        train_loss, train_acc, learning_rate = train_step(model=model,
                                            dataloader=train_dataloader,
                                            loss_fn=loss_fn,
                                            optimizer=optimizer,
@@ -211,14 +225,20 @@ def train(model: torch.nn.Module,
           f"train_loss: {train_loss:.4f} | "
           f"train_acc: {train_acc:.4f} | "
           f"test_loss: {test_loss:.4f} | "
-          f"test_acc: {test_acc:.4f}"
+          f"test_acc: {test_acc:.4f} | "
+          f"lr: {learning_rate:.8f}"
         )
 
         # Update results dictionary
+        results["epoch"].append(epoch+1)
         results["train_loss"].append(train_loss)
         results["train_acc"].append(train_acc)
         results["test_loss"].append(test_loss)
         results["test_acc"].append(test_acc)
+        results["lr"].append(learning_rate)
+        
+        if scheduler:
+            scheduler.step()
 
         # Use the writer parameter to track experiments
         if writer: # See if there's a writer, if so, log to it
@@ -236,6 +256,15 @@ def train(model: torch.nn.Module,
             writer.close()
         else:
             pass
+        
+        # Save results to CSV with model and dataloader names after all epochs
+        if seed:
+            csv_filename = f'csv_results/{model_name}_{seed}_seed_{epochs}_epochs_{dataloader_name}.csv'
+        else:
+            csv_filename = f'csv_results/{model_name}.csv'
+
+        df_results = pd.DataFrame(results)
+        df_results.to_csv(csv_filename, index=False)
 
     # Return the filled results at the end of the epochs
     return results

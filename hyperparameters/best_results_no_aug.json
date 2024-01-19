@@ -1,0 +1,1 @@
+{"best_hyperparameters": {"learning_rate": 0.00245, "batch_size": 32, "epochs": 28, "dropout": 0.5, "optimizer": "adam"}, "best_accuracy": 0.7328125}

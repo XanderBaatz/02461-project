@@ -1,3 +1,6 @@
 data/
 data2/
 runs/
+runs_old/
+/runs
+/runs_old

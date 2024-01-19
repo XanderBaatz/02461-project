@@ -1,0 +1,129 @@
+{
+    "trial_hyperparameters": {
+        "learning_rate": 3e-05,
+        "batch_size": 64,
+        "epochs": 21,
+        "dropout": 0.3,
+        "optimizer": "adam"
+    },
+    "trial_accuracy": 0.2
+}
+{
+    "trial_number": 1,
+    "trial_hyperparameters": {
+        "learning_rate": 3e-05,
+        "batch_size": 64,
+        "epochs": 27,
+        "dropout": 0.2,
+        "optimizer": "sgd"
+    },
+    "trial_accuracy": 0.2
+}
+{
+    "trial_number": 2,
+    "trial_hyperparameters": {
+        "learning_rate": 6e-05,
+        "batch_size": 32,
+        "epochs": 18,
+        "dropout": 0.2,
+        "optimizer": "sgd"
+    },
+    "trial_accuracy": 0.2
+}{"trial_number": 3, "trial_hyperparameters": {"learning_rate": 0.00039, "batch_size": 64, "epochs": 26, "dropout": 0.3, "optimizer": "sgd"}, "trial_accuracy": 0.4833333333333334}
+{"trial_number": 4, "trial_hyperparameters": {"learning_rate": 0.00569, "batch_size": 64, "epochs": 27, "dropout": 0.5, "optimizer": "rmsprop"}, "trial_accuracy": 0.2}
+{"trial_number": 5, "trial_hyperparameters": {"learning_rate": 5e-05, "batch_size": 16, "epochs": 24, "dropout": 0.2, "optimizer": "rmsprop"}, "trial_accuracy": 0.6214285714285714}
+{"trial_number": 6, "trial_hyperparameters": {"learning_rate": 9e-05, "batch_size": 64, "epochs": 24, "dropout": 0.4, "optimizer": "rmsprop"}, "trial_accuracy": 0.5838541666666667}
+{"trial_number": 7, "trial_hyperparameters": {"learning_rate": 0.00039, "batch_size": 64, "epochs": 21, "dropout": 0.3, "optimizer": "rmsprop"}, "trial_accuracy": 0.646875}
+{"trial_number": 8, "trial_hyperparameters": {"learning_rate": 0.00708, "batch_size": 64, "epochs": 18, "dropout": 0.2, "optimizer": "sgd"}, "trial_accuracy": 0.2}
+{"trial_number": 9, "trial_hyperparameters": {"learning_rate": 5e-05, "batch_size": 16, "epochs": 29, "dropout": 0.4, "optimizer": "sgd"}, "trial_accuracy": 0.2}
+{"trial_number": 10, "trial_hyperparameters": {"learning_rate": 0.00029, "batch_size": 32, "epochs": 29, "dropout": 0.5, "optimizer": "sgd"}, "trial_accuracy": 0.5234375}
+{"trial_number": 11, "trial_hyperparameters": {"learning_rate": 7e-05, "batch_size": 32, "epochs": 25, "dropout": 0.4, "optimizer": "sgd"}, "trial_accuracy": 0.2}
+{"trial_number": 12, "trial_hyperparameters": {"learning_rate": 0.00057, "batch_size": 16, "epochs": 28, "dropout": 0.4, "optimizer": "rmsprop"}, "trial_accuracy": 0.7107142857142856}
+{"trial_number": 13, "trial_hyperparameters": {"learning_rate": 0.0, "batch_size": 64, "epochs": 27, "dropout": 0.5, "optimizer": "sgd"}, "trial_accuracy": 0.2}
+{"trial_number": 14, "trial_hyperparameters": {"learning_rate": 0.00012, "batch_size": 16, "epochs": 23, "dropout": 0.4, "optimizer": "sgd"}, "trial_accuracy": 0.5035714285714284}
+{"trial_number": 15, "trial_hyperparameters": {"learning_rate": 0.00227, "batch_size": 32, "epochs": 16, "dropout": 0.2, "optimizer": "sgd"}, "trial_accuracy": 0.5875}
+{"trial_number": 16, "trial_hyperparameters": {"learning_rate": 0.01202, "batch_size": 16, "epochs": 21, "dropout": 0.2, "optimizer": "adam"}, "trial_accuracy": 0.6607142857142857}
+{"trial_number": 17, "trial_hyperparameters": {"learning_rate": 0.0, "batch_size": 32, "epochs": 22, "dropout": 0.4, "optimizer": "adam"}, "trial_accuracy": 0.2}
+{"trial_number": 18, "trial_hyperparameters": {"learning_rate": 2e-05, "batch_size": 64, "epochs": 17, "dropout": 0.4, "optimizer": "sgd"}, "trial_accuracy": 0.2}
+{"trial_number": 19, "trial_hyperparameters": {"learning_rate": 0.00078, "batch_size": 16, "epochs": 19, "dropout": 0.3, "optimizer": "sgd"}, "trial_accuracy": 0.6}
+{"trial_number": 20, "trial_hyperparameters": {"learning_rate": 9e-05, "batch_size": 64, "epochs": 18, "dropout": 0.2, "optimizer": "sgd"}, "trial_accuracy": 0.2}
+{"trial_number": 21, "trial_hyperparameters": {"learning_rate": 0.00031, "batch_size": 16, "epochs": 18, "dropout": 0.5, "optimizer": "rmsprop"}, "trial_accuracy": 0.6339285714285714}
+{"trial_number": 22, "trial_hyperparameters": {"learning_rate": 7e-05, "batch_size": 16, "epochs": 18, "dropout": 0.5, "optimizer": "sgd"}, "trial_accuracy": 0.2}
+{"trial_number": 23, "trial_hyperparameters": {"learning_rate": 9e-05, "batch_size": 64, "epochs": 22, "dropout": 0.2, "optimizer": "adam"}, "trial_accuracy": 0.5437500000000001}
+{"trial_number": 24, "trial_hyperparameters": {"learning_rate": 8e-05, "batch_size": 16, "epochs": 20, "dropout": 0.3, "optimizer": "adam"}, "trial_accuracy": 0.6035714285714285}
+{"trial_number": 25, "trial_hyperparameters": {"learning_rate": 3e-05, "batch_size": 32, "epochs": 30, "dropout": 0.2, "optimizer": "rmsprop"}, "trial_accuracy": 0.546875}
+{"trial_number": 26, "trial_hyperparameters": {"learning_rate": 2e-05, "batch_size": 32, "epochs": 26, "dropout": 0.5, "optimizer": "adam"}, "trial_accuracy": 0.2}
+{"trial_number": 27, "trial_hyperparameters": {"learning_rate": 0.00682, "batch_size": 32, "epochs": 23, "dropout": 0.2, "optimizer": "sgd"}, "trial_accuracy": 0.2}
+{"trial_number": 28, "trial_hyperparameters": {"learning_rate": 0.00476, "batch_size": 64, "epochs": 15, "dropout": 0.4, "optimizer": "rmsprop"}, "trial_accuracy": 0.2}
+{"trial_number": 29, "trial_hyperparameters": {"learning_rate": 0.00547, "batch_size": 32, "epochs": 16, "dropout": 0.2, "optimizer": "adam"}, "trial_accuracy": 0.66875}
+{"trial_number": 30, "trial_hyperparameters": {"learning_rate": 0.0001, "batch_size": 64, "epochs": 30, "dropout": 0.3, "optimizer": "adam"}, "trial_accuracy": 0.5817708333333333}
+{"trial_number": 31, "trial_hyperparameters": {"learning_rate": 0.00034, "batch_size": 16, "epochs": 23, "dropout": 0.5, "optimizer": "rmsprop"}, "trial_accuracy": 0.6857142857142857}
+{"trial_number": 32, "trial_hyperparameters": {"learning_rate": 0.00172, "batch_size": 32, "epochs": 21, "dropout": 0.2, "optimizer": "sgd"}, "trial_accuracy": 0.60625}
+{"trial_number": 33, "trial_hyperparameters": {"learning_rate": 0.01091, "batch_size": 64, "epochs": 18, "dropout": 0.4, "optimizer": "adam"}, "trial_accuracy": 0.5765625}
+{"trial_number": 34, "trial_hyperparameters": {"learning_rate": 0.00097, "batch_size": 64, "epochs": 30, "dropout": 0.3, "optimizer": "rmsprop"}, "trial_accuracy": 0.68125}
+{"trial_number": 35, "trial_hyperparameters": {"learning_rate": 2e-05, "batch_size": 64, "epochs": 15, "dropout": 0.2, "optimizer": "adam"}, "trial_accuracy": 0.2}
+{"trial_number": 36, "trial_hyperparameters": {"learning_rate": 0.00695, "batch_size": 32, "epochs": 18, "dropout": 0.2, "optimizer": "rmsprop"}, "trial_accuracy": 0.2}
+{"trial_number": 37, "trial_hyperparameters": {"learning_rate": 0.00045, "batch_size": 32, "epochs": 24, "dropout": 0.5, "optimizer": "adam"}, "trial_accuracy": 0.6609375}
+{"trial_number": 38, "trial_hyperparameters": {"learning_rate": 0.0, "batch_size": 16, "epochs": 28, "dropout": 0.4, "optimizer": "adam"}, "trial_accuracy": 0.2}
+{"trial_number": 39, "trial_hyperparameters": {"learning_rate": 6e-05, "batch_size": 32, "epochs": 17, "dropout": 0.4, "optimizer": "adam"}, "trial_accuracy": 0.5640625}
+{"trial_number": 40, "trial_hyperparameters": {"learning_rate": 0.00846, "batch_size": 32, "epochs": 19, "dropout": 0.3, "optimizer": "sgd"}, "trial_accuracy": 0.2}
+{"trial_number": 41, "trial_hyperparameters": {"learning_rate": 0.00578, "batch_size": 16, "epochs": 20, "dropout": 0.2, "optimizer": "rmsprop"}, "trial_accuracy": 0.2}
+{"trial_number": 42, "trial_hyperparameters": {"learning_rate": 5e-05, "batch_size": 64, "epochs": 18, "dropout": 0.3, "optimizer": "adam"}, "trial_accuracy": 0.2}
+{"trial_number": 43, "trial_hyperparameters": {"learning_rate": 9e-05, "batch_size": 64, "epochs": 26, "dropout": 0.4, "optimizer": "adam"}, "trial_accuracy": 0.565625}
+{"trial_number": 44, "trial_hyperparameters": {"learning_rate": 4e-05, "batch_size": 32, "epochs": 27, "dropout": 0.3, "optimizer": "adam"}, "trial_accuracy": 0.565625}
+{"trial_number": 45, "trial_hyperparameters": {"learning_rate": 0.00029, "batch_size": 16, "epochs": 21, "dropout": 0.3, "optimizer": "sgd"}, "trial_accuracy": 0.5357142857142858}
+{"trial_number": 46, "trial_hyperparameters": {"learning_rate": 0.01663, "batch_size": 64, "epochs": 24, "dropout": 0.3, "optimizer": "sgd"}, "trial_accuracy": 0.2}
+{"trial_number": 47, "trial_hyperparameters": {"learning_rate": 0.00096, "batch_size": 64, "epochs": 16, "dropout": 0.2, "optimizer": "sgd"}, "trial_accuracy": 0.5229166666666668}
+{"trial_number": 48, "trial_hyperparameters": {"learning_rate": 6e-05, "batch_size": 64, "epochs": 21, "dropout": 0.5, "optimizer": "rmsprop"}, "trial_accuracy": 0.5109375}
+{"trial_number": 49, "trial_hyperparameters": {"learning_rate": 0.00089, "batch_size": 64, "epochs": 25, "dropout": 0.2, "optimizer": "sgd"}, "trial_accuracy": 0.5578125}
+{"trial_number": 50, "trial_hyperparameters": {"learning_rate": 0.00256, "batch_size": 16, "epochs": 28, "dropout": 0.2, "optimizer": "sgd"}, "trial_accuracy": 0.7339285714285715}
+{"trial_number": 51, "trial_hyperparameters": {"learning_rate": 0.00393, "batch_size": 32, "epochs": 16, "dropout": 0.3, "optimizer": "rmsprop"}, "trial_accuracy": 0.2}
+{"trial_number": 52, "trial_hyperparameters": {"learning_rate": 2e-05, "batch_size": 64, "epochs": 26, "dropout": 0.3, "optimizer": "rmsprop"}, "trial_accuracy": 0.4651041666666667}
+{"trial_number": 53, "trial_hyperparameters": {"learning_rate": 0.00115, "batch_size": 64, "epochs": 20, "dropout": 0.2, "optimizer": "rmsprop"}, "trial_accuracy": 0.2}
+{"trial_number": 54, "trial_hyperparameters": {"learning_rate": 0.01133, "batch_size": 64, "epochs": 20, "dropout": 0.3, "optimizer": "adam"}, "trial_accuracy": 0.5546875}
+{"trial_number": 55, "trial_hyperparameters": {"learning_rate": 0.01325, "batch_size": 64, "epochs": 29, "dropout": 0.5, "optimizer": "rmsprop"}, "trial_accuracy": 0.5125}
+{"trial_number": 56, "trial_hyperparameters": {"learning_rate": 9e-05, "batch_size": 16, "epochs": 17, "dropout": 0.2, "optimizer": "adam"}, "trial_accuracy": 0.6535714285714286}
+{"trial_number": 57, "trial_hyperparameters": {"learning_rate": 0.00999, "batch_size": 32, "epochs": 17, "dropout": 0.5, "optimizer": "rmsprop"}, "trial_accuracy": 0.4984375}
+{"trial_number": 58, "trial_hyperparameters": {"learning_rate": 0.00128, "batch_size": 16, "epochs": 22, "dropout": 0.2, "optimizer": "sgd"}, "trial_accuracy": 0.6696428571428571}
+{"trial_number": 59, "trial_hyperparameters": {"learning_rate": 0.00336, "batch_size": 16, "epochs": 20, "dropout": 0.3, "optimizer": "rmsprop"}, "trial_accuracy": 0.6464285714285715}
+{"trial_number": 60, "trial_hyperparameters": {"learning_rate": 0.00737, "batch_size": 16, "epochs": 27, "dropout": 0.3, "optimizer": "rmsprop"}, "trial_accuracy": 0.6142857142857142}
+{"trial_number": 61, "trial_hyperparameters": {"learning_rate": 0.00246, "batch_size": 64, "epochs": 19, "dropout": 0.5, "optimizer": "sgd"}, "trial_accuracy": 0.4822916666666667}
+{"trial_number": 62, "trial_hyperparameters": {"learning_rate": 2e-05, "batch_size": 64, "epochs": 21, "dropout": 0.5, "optimizer": "rmsprop"}, "trial_accuracy": 0.2}
+{"trial_number": 63, "trial_hyperparameters": {"learning_rate": 0.00082, "batch_size": 32, "epochs": 22, "dropout": 0.5, "optimizer": "rmsprop"}, "trial_accuracy": 0.6203125}
+{"trial_number": 64, "trial_hyperparameters": {"learning_rate": 3e-05, "batch_size": 32, "epochs": 29, "dropout": 0.5, "optimizer": "sgd"}, "trial_accuracy": 0.2}
+{"trial_number": 65, "trial_hyperparameters": {"learning_rate": 0.00862, "batch_size": 64, "epochs": 19, "dropout": 0.5, "optimizer": "rmsprop"}, "trial_accuracy": 0.2}
+{"trial_number": 66, "trial_hyperparameters": {"learning_rate": 0.00884, "batch_size": 16, "epochs": 23, "dropout": 0.3, "optimizer": "adam"}, "trial_accuracy": 0.6857142857142857}
+{"trial_number": 67, "trial_hyperparameters": {"learning_rate": 0.00066, "batch_size": 64, "epochs": 27, "dropout": 0.5, "optimizer": "sgd"}, "trial_accuracy": 0.5098958333333333}
+{"trial_number": 68, "trial_hyperparameters": {"learning_rate": 0.01055, "batch_size": 64, "epochs": 29, "dropout": 0.2, "optimizer": "adam"}, "trial_accuracy": 0.603125}
+{"trial_number": 69, "trial_hyperparameters": {"learning_rate": 5e-05, "batch_size": 32, "epochs": 22, "dropout": 0.2, "optimizer": "adam"}, "trial_accuracy": 0.5546875}
+{"trial_number": 70, "trial_hyperparameters": {"learning_rate": 0.00067, "batch_size": 64, "epochs": 25, "dropout": 0.5, "optimizer": "sgd"}, "trial_accuracy": 0.5161458333333334}
+{"trial_number": 71, "trial_hyperparameters": {"learning_rate": 2e-05, "batch_size": 32, "epochs": 20, "dropout": 0.2, "optimizer": "adam"}, "trial_accuracy": 0.2}
+{"trial_number": 72, "trial_hyperparameters": {"learning_rate": 0.00643, "batch_size": 64, "epochs": 29, "dropout": 0.2, "optimizer": "rmsprop"}, "trial_accuracy": 0.2}
+{"trial_number": 73, "trial_hyperparameters": {"learning_rate": 4e-05, "batch_size": 32, "epochs": 19, "dropout": 0.5, "optimizer": "adam"}, "trial_accuracy": 0.503125}
+{"trial_number": 74, "trial_hyperparameters": {"learning_rate": 0.00028, "batch_size": 32, "epochs": 26, "dropout": 0.2, "optimizer": "sgd"}, "trial_accuracy": 0.56875}
+{"trial_number": 75, "trial_hyperparameters": {"learning_rate": 5e-05, "batch_size": 64, "epochs": 23, "dropout": 0.2, "optimizer": "rmsprop"}, "trial_accuracy": 0.5828125}
+{"trial_number": 76, "trial_hyperparameters": {"learning_rate": 4e-05, "batch_size": 64, "epochs": 20, "dropout": 0.3, "optimizer": "sgd"}, "trial_accuracy": 0.2}
+{"trial_number": 77, "trial_hyperparameters": {"learning_rate": 0.00464, "batch_size": 64, "epochs": 17, "dropout": 0.5, "optimizer": "rmsprop"}, "trial_accuracy": 0.2}
+{"trial_number": 78, "trial_hyperparameters": {"learning_rate": 0.01258, "batch_size": 64, "epochs": 18, "dropout": 0.4, "optimizer": "adam"}, "trial_accuracy": 0.5776041666666667}
+{"trial_number": 79, "trial_hyperparameters": {"learning_rate": 0.0001, "batch_size": 16, "epochs": 28, "dropout": 0.2, "optimizer": "adam"}, "trial_accuracy": 0.7}
+{"trial_number": 80, "trial_hyperparameters": {"learning_rate": 0.00888, "batch_size": 64, "epochs": 27, "dropout": 0.2, "optimizer": "sgd"}, "trial_accuracy": 0.2}
+{"trial_number": 81, "trial_hyperparameters": {"learning_rate": 5e-05, "batch_size": 64, "epochs": 24, "dropout": 0.5, "optimizer": "sgd"}, "trial_accuracy": 0.2}
+{"trial_number": 82, "trial_hyperparameters": {"learning_rate": 0.00881, "batch_size": 32, "epochs": 17, "dropout": 0.4, "optimizer": "adam"}, "trial_accuracy": 0.63125}
+{"trial_number": 83, "trial_hyperparameters": {"learning_rate": 8e-05, "batch_size": 32, "epochs": 29, "dropout": 0.5, "optimizer": "sgd"}, "trial_accuracy": 0.2}
+{"trial_number": 84, "trial_hyperparameters": {"learning_rate": 0.00075, "batch_size": 32, "epochs": 21, "dropout": 0.4, "optimizer": "rmsprop"}, "trial_accuracy": 0.6671875}
+{"trial_number": 85, "trial_hyperparameters": {"learning_rate": 0.00235, "batch_size": 64, "epochs": 29, "dropout": 0.3, "optimizer": "adam"}, "trial_accuracy": 0.7182291666666666}
+{"trial_number": 86, "trial_hyperparameters": {"learning_rate": 0.00062, "batch_size": 32, "epochs": 25, "dropout": 0.4, "optimizer": "rmsprop"}, "trial_accuracy": 0.6953125}
+{"trial_number": 87, "trial_hyperparameters": {"learning_rate": 0.00338, "batch_size": 16, "epochs": 28, "dropout": 0.2, "optimizer": "rmsprop"}, "trial_accuracy": 0.6714285714285714}
+{"trial_number": 88, "trial_hyperparameters": {"learning_rate": 0.00088, "batch_size": 32, "epochs": 19, "dropout": 0.5, "optimizer": "rmsprop"}, "trial_accuracy": 0.6671875}
+{"trial_number": 89, "trial_hyperparameters": {"learning_rate": 0.00897, "batch_size": 64, "epochs": 23, "dropout": 0.4, "optimizer": "rmsprop"}, "trial_accuracy": 0.2}
+{"trial_number": 90, "trial_hyperparameters": {"learning_rate": 0.01997, "batch_size": 16, "epochs": 19, "dropout": 0.4, "optimizer": "rmsprop"}, "trial_accuracy": 0.475}
+{"trial_number": 91, "trial_hyperparameters": {"learning_rate": 0.0009, "batch_size": 64, "epochs": 24, "dropout": 0.5, "optimizer": "adam"}, "trial_accuracy": 0.6630208333333332}
+{"trial_number": 92, "trial_hyperparameters": {"learning_rate": 8e-05, "batch_size": 64, "epochs": 16, "dropout": 0.3, "optimizer": "rmsprop"}, "trial_accuracy": 0.565625}
+{"trial_number": 93, "trial_hyperparameters": {"learning_rate": 0.00838, "batch_size": 32, "epochs": 24, "dropout": 0.3, "optimizer": "adam"}, "trial_accuracy": 0.6328125}
+{"trial_number": 94, "trial_hyperparameters": {"learning_rate": 4e-05, "batch_size": 16, "epochs": 17, "dropout": 0.5, "optimizer": "sgd"}, "trial_accuracy": 0.2}
+{"trial_number": 95, "trial_hyperparameters": {"learning_rate": 1e-05, "batch_size": 16, "epochs": 27, "dropout": 0.3, "optimizer": "sgd"}, "trial_accuracy": 0.2}
+{"trial_number": 96, "trial_hyperparameters": {"learning_rate": 0.00098, "batch_size": 32, "epochs": 27, "dropout": 0.3, "optimizer": "sgd"}, "trial_accuracy": 0.6125}
+{"trial_number": 97, "trial_hyperparameters": {"learning_rate": 0.00504, "batch_size": 64, "epochs": 20, "dropout": 0.5, "optimizer": "rmsprop"}, "trial_accuracy": 0.2}
+{"trial_number": 98, "trial_hyperparameters": {"learning_rate": 0.00328, "batch_size": 64, "epochs": 29, "dropout": 0.4, "optimizer": "sgd"}, "trial_accuracy": 0.5994791666666666}
+{"trial_number": 99, "trial_hyperparameters": {"learning_rate": 0.00098, "batch_size": 16, "epochs": 24, "dropout": 0.3, "optimizer": "rmsprop"}, "trial_accuracy": 0.7232142857142857}
+{"trial_number": 100, "trial_hyperparameters": {"learning_rate": 3e-05, "batch_size": 32, "epochs": 23, "dropout": 0.3, "optimizer": "rmsprop"}, "trial_accuracy": 0.5390625}

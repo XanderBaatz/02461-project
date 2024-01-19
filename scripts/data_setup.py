@@ -16,7 +16,8 @@ def create_dataloaders(
     train_transform: transforms.Compose, # add parameter for train transform (transforms on train dataset)
     test_transform: transforms.Compose,  # add parameter for test transform (transforms on test dataset) 
     batch_size: int, 
-    num_workers: int=NUM_WORKERS):
+    num_workers: int=NUM_WORKERS,
+    shuffle_test: bool=True):
     
     """
     Creates training and testing DataLoaders.
@@ -62,7 +63,7 @@ def create_dataloaders(
     test_dataloader = DataLoader(
         test_data,
         batch_size=batch_size,
-        shuffle=True,
+        shuffle=shuffle_test,
         num_workers=num_workers,
         pin_memory=True,
     )
